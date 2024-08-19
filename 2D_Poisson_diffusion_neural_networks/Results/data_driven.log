@@ -1,0 +1,12 @@
+Number of parameters in the neural network: 81
+Number of DoFs: 1,681
+Iteration 0: Loss = 9.401031910940981
+Iteration 100: Loss = 0.05224335360997782
+Iteration 200: Loss = 0.025735705866030398
+Iteration 300: Loss = 0.007206255000686377
+Iteration 400: Loss = 0.0012534268512968785
+Iteration 500: Loss = 0.0005396643288943364
+Iteration 600: Loss = 0.00046765487115604093
+Iteration 700: Loss = 0.00044013941194380403
+Iteration 800: Loss = 0.00041476626914453165
+Iteration 900: Loss = 0.00038919411858285934
