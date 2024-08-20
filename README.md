@@ -143,6 +143,7 @@ The solver can be found in [Example 9: 2D_Poisson_diffusion_neural_networks](./2
 ## Authors
 - [Denis Khimin](https://github.com/Denis-Khimin)
 - [Julian Roth](https://github.com/mathmerizing)
+- [Alexander Henkes](https://github.com/ahenkes1)
 - [Thomas Wick](https://github.com/tommeswick)
 
 
