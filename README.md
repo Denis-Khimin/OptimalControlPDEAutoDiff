@@ -1,4 +1,5 @@
 # Optimal Control with PDEs solved by a Differentiable Solver
+
 This repository uses differentiable PDE solvers for optimal control problems.
 Therein, two different approaches are shown: 
 1) using [torch_sparse_solve](https://github.com/flaport/torch_sparse_solve) to enable differentiation through sparse direct solvers
@@ -6,6 +7,13 @@ Therein, two different approaches are shown:
 
 The first four examples require the [torch_sparse_solve](https://github.com/flaport/torch_sparse_solve) library, along with its [dependencies](https://github.com/flaport/torch_sparse_solve#dependencies), and [matplotlib](https://github.com/matplotlib/matplotlib),
 where the last five examples require [torch-fenics](https://github.com/barkm/torch-fenics) with its [dependencies](https://github.com/barkm/torch-fenics#install) including [FEniCS](https://fenicsproject.org/).
+
+## Authors
+- [Denis Khimin](https://github.com/Denis-Khimin)
+- [Julian Roth](https://github.com/mathmerizing)
+- [Alexander Henkes](https://github.com/ahenkes1)
+- [Thomas Wick](https://github.com/tommeswick)
+
 ## Numerical Examples
 ### Example 1: 1D Poisson with scalar-valued force (clothesline)
 
@@ -139,12 +147,6 @@ To achieve this, we use a fully connected neural network with a single hidden la
 and a sigmoid activation function, resulting in 81 trainable parameters.
 
 The solver can be found in [Example 9: 2D_Poisson_diffusion_neural_networks](./2D_Poisson_diffusion_neural_networks/main.py).
-
-## Authors
-- [Denis Khimin](https://github.com/Denis-Khimin)
-- [Julian Roth](https://github.com/mathmerizing)
-- [Alexander Henkes](https://github.com/ahenkes1)
-- [Thomas Wick](https://github.com/tommeswick)
 
 
 
