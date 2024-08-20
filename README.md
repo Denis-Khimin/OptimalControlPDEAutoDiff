@@ -140,7 +140,10 @@ and a sigmoid activation function, resulting in 81 trainable parameters.
 
 The solver can be found in [Example 9: 2D_Poisson_diffusion_neural_networks](./2D_Poisson_diffusion_neural_networks/main.py).
 
-
+## Authors
+- [Denis Khimin](https://github.com/Denis-Khimin)
+- [Julian Roth](https://github.com/mathmerizing)
+- [Thomas Wick](https://github.com/tommeswick)
 
 
 
