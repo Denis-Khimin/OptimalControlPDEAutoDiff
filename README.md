@@ -1,30 +1,30 @@
-# Optimal Control with PDEs solved by a Differentiable Sparse Direct Solver 
-This repository leverages [torch_sparse_solve](https://github.com/flaport/torch_sparse_solve) 
-to enable differentiation through sparse direct solvers for optimal control problems. 
-It also utilizes [torch-fenics](https://github.com/barkm/torch-fenics) to seamlessly integrate [FEniCS](https://fenicsproject.org/) 
-solvers with [PyTorch](https://github.com/pytorch/pytorch).
+# Optimal Control with PDEs solved by a Differentiable Solver
+This repository uses differentiable PDE solvers for optimal control problems.
+Therein, two different approaches are shown: 
+1) using [torch_sparse_solve](https://github.com/flaport/torch_sparse_solve) to enable differentiation through sparse direct solvers
+2) using [torch-fenics](https://github.com/barkm/torch-fenics) to seamlessly integrate [FEniCS](https://fenicsproject.org/) solvers with [PyTorch](https://github.com/pytorch/pytorch) and especially neural network based control
 
-The first four examples require the [torch_sparse_solve](https://github.com/flaport/torch_sparse_solve) library, along with its dependencies, and [matplotlib](https://github.com/matplotlib/matplotlib),
-where the last five examples require [torch-fenics](https://github.com/barkm/torch-fenics) with its dependencies including [FEniCS](https://fenicsproject.org/).
+The first four examples require the [torch_sparse_solve](https://github.com/flaport/torch_sparse_solve) library, along with its [dependencies](https://github.com/flaport/torch_sparse_solve#dependencies), and [matplotlib](https://github.com/matplotlib/matplotlib),
+where the last five examples require [torch-fenics](https://github.com/barkm/torch-fenics) with its [dependencies](https://github.com/barkm/torch-fenics#install) including [FEniCS](https://fenicsproject.org/).
 ## Numerical Examples
-### Example 1: 1D Poisson with scalar-valued force (clothline)
+### Example 1: 1D Poisson with scalar-valued force (clothesline)
 
-The goal is to determine an approximate force, denoted as $f^{guess}$, that produces a specific outcome. The qualiy of the solution $f^{guess}$ is measured by the distance between the
-corresponding solution of the PDE (see below) $u(f^{guess})$ and some desired solution $u(f^{true})$ for a given force $f^{true}$ which generates it. 
+The goal is to determine an approximate force, denoted as $f^{\text{guess}}$, that produces a specific outcome. The qualiy of the force $f^{\text{guess}}$ is measured by the distance between the
+corresponding solution of the PDE (see below) $u(f^{\text{guess}})$ and some desired solution $u(f^{\text{true}})$ for a given force $f^{\text{true}}$ which generates it. 
 Mathematically, this involves minimizing a tracking-type
 cost functional (or loss function) $J$, subject to constraints imposed by the 1D Poission equation on the domain [0,1]. 
 More precisely, in the PDE constraint, we solve 
 for a function $u \colon (0,1) \to \mathbb{R}$. The overall problem reads as
 ```math
 \begin{align*}
-\min_{f^{guess}}&\quad J(f^{guess}) := \| u(f^{true}) - u(f^{guess})\| \\
-\text{ s.t.}&-\partial_x^2 u(x) = f^{guess}, \\
+\min_{f^{\text{guess}}}&\quad J(f^{\text{guess}}) := \| u(f^{\text{true}}) - u(f^{\text{guess}})\| \\
+\text{ s.t.}&-\partial_x^2 u(x) = f^{\text{guess}}, \\
 &\hspace{2em}u(0) = u(1) = 0.
 \end{align*}
 ```
 From a mechanical perspective, this example simulates a clothesline that deforms under gravity.
 The solver tries then to determine the scalar-valued gravity from observations of the clothesline's deformation.
-The solver can be found in [Example 1: 1D_Poisson_scala_force](./1D_Poisson_scalar_force/main.py).
+The solver can be found in [Example 1: 1D_Poisson_scalar_force](./1D_Poisson_scalar_force/main.py).
 
 ### Example 2: 1D Poisson with vector-valued force
 
@@ -34,13 +34,13 @@ The solver can be found in [Example 2: 1D_Poisson_vector_force](./1D_Poisson_vec
 
 ### Example 3: 1+1D space-time heat equation with vector-valued force and initial condition
 
-In the light of Example 1, the goal here is quite similar. We want to find a control, i.e., a right hand side of a PDE wich leads to a certan outcome. 
+In the light of Example 1, the goal here is quite similar. We want to find a control, i.e., a right hand side of a PDE wich leads to a certain outcome. 
 Once again, we minimize a tracking-type cost functional regularized with a Tikhonov term, where the constraint is given by the heat equation (a nonstationary PDE).
 The overall problem reads as
 ```math
 \begin{align*}
-\min_{f^{guess}}\quad J(f^{guess}) := \| u&(f^{true}) - u(f^{guess})\| + \alpha \| f^{guess} \| \\
-\text{ s.t.}\quad\partial_t u(x,t) -\partial_x^2 u(x,t) &= f^{guess}(x,t), \\
+\min_{f^{\text{guess}}}\quad J(f^{\text{guess}}) := \| u&(f^{\text{true}}) - u(f^{\text{guess}})\| + \alpha \| f^{\text{guess}} \| \\
+\text{ s.t.}\quad\partial_t u(x,t) -\partial_x^2 u(x,t) &= f^{\text{guess}}(x,t), \\
 u(0,t) &= u(1,t) = 0,\\
 u(x,0) &= u_0(x).
 \end{align*}
@@ -48,7 +48,7 @@ u(x,0) &= u_0(x).
 In this experiment we are looking for a space-time function $u \colon (0,1) \times (0,T) \to \mathbb{R}$. 
 The discretization is also performed in a space-time fashion, i.e., not in a time incremental way.
 
-From a mechanical perspective, this example simulates the heat equation an tries to learn the right-hand side 
+From a mechanical perspective, this example simulates the heat equation and tries to learn the right-hand side 
 of the PDE along with the initial conditions. The solver can be found 
 in [Example 3: 1+1D_space_time_heat_equation](./1+1D_space_time_heat_equation/main.py).
 
@@ -71,10 +71,10 @@ The PDE constraint in strong form reads as
 \end{align*}
 ```
 The parameters that need to be learned are then $\mu^{guess} = (\kappa_0, \kappa_1, \kappa_2, \kappa_3, \kappa_4, Bi) \in \mathbb{R}^6$ and the
-loss function is defineda s
+loss function is defined as
 ```math
 \begin{align*}
-    J(\mu^{guess}) := \|u(\mu^{true}) - u(\mu^{guess})\|_2 + 0.1 \left\|\frac{\mu^{guess}-\mu^{ref}}{\mu^{ref}}\right\|_2,
+    J(\mu^{\text{guess}}) := \|u(\mu^{\text{true}}) - u(\mu^{\text{guess}})\|_2 + 0.1 \left\|\frac{\mu^{\text{guess}}-\mu^{\text{ref}}}{\mu^{\text{ref}}}\right\|_2,
 \end{align*}
 ```
 where $\mu^{ref}$ are some reference coefficients.
@@ -125,7 +125,7 @@ The solver can be found in [Example 8: 2D_FSI_Lame_parameters](./2D_FSI_Lame_par
 ### Example 9: 2D Poisson with spatially-variable diffusion coefficient combined with neural networks
 
 In our final example, we consider a 2D Poisson problem with a spatially-variable diffusion coefficient that we want to optimize.
-The PDE constraint is defined as: find $u: \Omega \subset \mathbb{R}^2 \rightarrow \mathbb{R}$ such that
+The PDE constraint is defined as: Find $u: \Omega \subset \mathbb{R}^2 \rightarrow \mathbb{R}$ such that
 ```math
 \begin{align*}
     - \nabla \cdot (\kappa(x,y) \nabla u(x,y)) &= f, \qquad \forall (x,y) \in \Omega, \\
@@ -133,8 +133,8 @@ The PDE constraint is defined as: find $u: \Omega \subset \mathbb{R}^2 \rightarr
 \end{align*}
 ```
 The true (or desired) diffusion coefficient is given by $\kappa^{true}(x,y) = 1 + 2x + 3y^2$ and the tracking-type loss function
-is defined as $J(\kappa^{guess}) := \|u(\kappa^{true}) - u(\kappa^{guess}) \|$.
-Unlike the previous examples, our goal here is to find a network surrogate for $\kappa^{guess}$. 
+is defined as $J(\kappa^{\text{guess}}) :=  \left\|u(\kappa^{\text{true}}) - u(\kappa^{\text{guess}})\right\|_2$.
+Unlike the previous examples, our goal here is to find a network surrogate for $\kappa^{\text{guess}}$. 
 To achieve this, we use a fully connected neural network with a single hidden layer containing 20 neurons 
 and a sigmoid activation function, resulting in 81 trainable parameters.
 
