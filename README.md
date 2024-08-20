@@ -132,8 +132,8 @@ The PDE constraint is defined as: find $u: \Omega \subset \mathbb{R}^2 \rightarr
     u &= 0 \qquad \forall (x,y) \in \partial \Omega.
 \end{align*}
 ```
-The true (or desired) diffusion coefficient is given by $\kappa^{\true}(x,y) = 1 + 2x + 3y^2$ and the tracking-type loss function
-is defined as $J(\kappa^{\guess}) := \|u(\kappa^{true}) - u(\kappa^{guess}) \|$.
+The true (or desired) diffusion coefficient is given by $\kappa^{true}(x,y) = 1 + 2x + 3y^2$ and the tracking-type loss function
+is defined as $J(\kappa^{guess}) := \|u(\kappa^{true}) - u(\kappa^{guess}) \|$.
 Unlike the previous examples, our goal here is to find a network surrogate for $\kappa^{guess}$. 
 To achieve this, we use a fully connected neural network with a single hidden layer containing 20 neurons 
 and a sigmoid activation function, resulting in 81 trainable parameters.
