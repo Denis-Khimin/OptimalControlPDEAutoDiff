@@ -108,8 +108,8 @@ In the strong form the PDE is given as
     \nabla \cdot v &= 0 \qquad \text{in }  \Omega,
 \end{align*}
 ```
-where we have to determine the vector-valued velocity $v: \Omega \rightarrow \mathbb{R}^2$ and the scalar-valued 
-pressure $p: \Omega \rightarrow \mathbb{R}$ such that the drag coefficient
+where we have to determine the vector-valued velocity $v: \Omega\subset\mathbb{R}^2 \rightarrow \mathbb{R}^2$ and the scalar-valued 
+pressure $p: \Omega\subset\mathbb{R}^2 \rightarrow \mathbb{R}$ such that the drag coefficient
 ```math
 \begin{align*}
     C_D(v, p) = 500 \int_{\Gamma_{\text{obstacle}}}\sigma(v, p) \cdot n \cdot \begin{pmatrix}
