@@ -1,4 +1,5 @@
 # Optimal Control with PDEs solved by a Differentiable Solver
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13353212.svg)](https://doi.org/10.5281/zenodo.13353212)
 
 This repository uses differentiable PDE solvers for optimal control problems.
 Therein, two different approaches are shown: 
