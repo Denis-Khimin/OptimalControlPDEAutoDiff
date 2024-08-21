@@ -93,7 +93,7 @@ The solver can be found in [Example 5: 2D_Poisson_thermal_fin](./2D_Poisson_ther
 
 Here, the PDE constraint is given by the nonlinear heat equation $\partial_t u - \Delta u + u^2 = f$ with initial conditions $u(t=0) = u_0$. 
 As in the previous nonstationary examples, $u$ represents a space-time function $u\colon [0,1]^2 \times (0,1) \to \mathbb{R}$.
-The objective is to determine an initial condition that minimizes a specific loss function, thereby leading to the desired observations.
+The objective here is to determine an initial condition that minimizes a specific loss function, thereby leading to the desired observations.
 Unlike in Example 4, we employ a Crank-Nicolson time-stepping scheme here.
 
 The solver can be found in [Example 6: 2+1D_nonlinear_heat_unknown_init_cond](./2+1D_nonlinear_heat_unknown_init_cond/main.py).
